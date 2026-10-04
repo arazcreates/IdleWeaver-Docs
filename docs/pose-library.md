@@ -30,18 +30,18 @@ One anchor is enough to start. Add two to four for a character that changes its 
 | **Animation** | The idle loop or pose to use. It must use the same skeleton as the mesh. |
 | **Mode** | **Play Looping** plays the animation as a loop. **Static Pose** holds one frame of it. |
 | **Fixed Time** | For Static Pose only: the time in the animation to hold, in seconds. |
-| **Selection Weight** | How often this anchor is picked, compared with the others. A weight of 2 is picked twice as often as a weight of 1. |
+| **Selection Weight** | How often the plugin picks this anchor, compared with the others. The plugin picks a weight of 2 twice as often as a weight of 1. |
 | **Min Hold Seconds / Max Hold Seconds** | How long the character stays on this anchor before it changes. The plugin picks a random time between the two. |
 | **Play Rate Range** | Each character plays the loop at a slightly different speed, picked from this range. This keeps a crowd from moving in sync. |
 | **Blend Time** | How long the blend into this anchor takes, in seconds. |
-| **Min Tension / Max Tension** | The anchor is only picked while the character's Tension is in this range. Example: an arms-crossed pose that only shows when the character is calm. |
+| **Min Tension / Max Tension** | The plugin only picks this anchor while the character's Tension is in this range. Example: an arms-crossed pose that only shows when the character is calm. |
 | **Tags** | Free labels for your own tools. The plugin does not read them. |
 
 ## The library settings
 
 | Setting | What it does |
 |---|---|
-| **Avoid Immediate Repeat** | The same anchor is not picked twice in a row when another one is available. |
+| **Avoid Immediate Repeat** | The plugin does not pick the same anchor twice in a row when another one is available. |
 | **Allow Additive Animations** | Off by default. See the note below. |
 
 ## Use the library
@@ -61,11 +61,11 @@ You can also change the library while the game runs. Set the **Pose Library** pr
 
 ## Good to know
 
-- **Additive animations are skipped.** An additive clip (for example an aim offset or a lean) is not a full pose. If it plays as one, the body collapses. The plugin skips these clips and writes one warning to the Output Log. If every anchor in your library is additive, the character stays in the reference pose.
+- **The plugin skips additive animations.** An additive clip (for example an aim offset or a lean) is not a full pose. If it plays as one, the body collapses. It writes one warning to the Output Log for each skipped clip. If every anchor in your library is additive, the character stays in the reference pose.
 - **Use real idles.** Walk, run and jump clips make poor anchors.
 - **Loops should loop.** If the first and last frame of a clip do not match, you see a small jump each time it repeats. Fix the clip, or use **Static Pose** mode.
 - **One-frame poses work.** Set **Mode** to **Static Pose**.
-- **Sitting works too.** Use a sit animation as the anchor. Then turn off the Feet and Weight Shift channels in the profile. A sitting character does not stand on its feet, so those two channels do not fit.
+- **Sitting works too.** Use a sit animation as the anchor. Then disable the Feet and Weight Shift channels in the profile. A sitting character does not stand on its feet, so those two channels do not fit.
 
 ## Problems
 
