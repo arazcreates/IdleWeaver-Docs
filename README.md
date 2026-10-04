@@ -6,6 +6,15 @@ Idle Weaver adds procedural idle motion to NPCs in **Unreal Engine 5.8**. It lay
 
 Idle Weaver is a layer. It does not make a character walk, sit, or dance. It makes a standing, sitting, or waiting character look alive.
 
+## Guides
+
+Step-by-step pages for the most common tasks:
+
+- [Install Idle Weaver](docs/installing.md): from Fab or from source, and how to check that it works.
+- [Make a Pose Library](docs/pose-library.md): give a character its base pose, and what each anchor setting does.
+- [Presets and Profiles](docs/profiles-and-presets.md): how the six presets differ, and how to make and tune your own profile.
+- [Troubleshooting](docs/troubleshooting.md): A-pose, no motion, gaze, feet, eyes, MetaHuman and more.
+
 ## What it does
 
 | Feature | Where it is |
@@ -32,6 +41,8 @@ Every feature works from Blueprint and from C++.
 - If you copy the source into a project's `Plugins` folder, you must compile it once. For this you need **Visual Studio 2022** with the *Game development with C++* workload.
 
 ## Install from source
+
+For the Fab install and more detail, see [Install Idle Weaver](docs/installing.md).
 
 1. Copy the `IdleWeaver` folder into `YourProject/Plugins/`. Make the `Plugins` folder if it does not exist.
 2. If the project has no C++ code, open it and use **Tools > New C++ Class > None** once. This lets Unreal compile plugins.
@@ -108,6 +119,8 @@ The **FOV Degrees** cone is measured from the actor's forward direction. The hea
 
 ## The core channels
 
+To compare the presets or tune these channels, see [Presets and Profiles](docs/profiles-and-presets.md).
+
 - **Breathing.** Inhale is faster than exhale. The rate changes a little over time. The shoulders lift, and the neck keeps the head steady. Tired characters sigh from time to time.
 - **Weight shift.** The pelvis moves and rolls toward one leg, and the spine rolls back to keep the head over the feet. A small constant sway runs on top. On a slope, the character leans uphill.
 - **Gaze.** The head and neck turn toward the target and the eyes lead. With no target, the gaze drifts slowly.
@@ -127,6 +140,8 @@ All of these are off by default. When they are off, the motion is exactly the sa
   - **Limit Inward Swing.** Caps how far the arms swing in toward the body.
 
 ## Pose Library
+
+For a step-by-step guide, see [Make a Pose Library](docs/pose-library.md).
 
 A Pose Library asset holds anchors: authored poses or idle loops. The **Idle Pose Library** node holds each anchor for a random time and then blends to another one. Each anchor has a weight, a hold time range, a blend time, a play rate range and a tension range.
 
@@ -169,6 +184,8 @@ A baked clip is a normal Animation Sequence, so the IK Retargeter can use it.
 - If an NPC holds a prop, set **Fidgets Intensity** to 0 on its profile, or mask the hand with Layered Blend per Bone.
 
 ## Known limits
+
+For fixes to common problems, see [Troubleshooting](docs/troubleshooting.md).
 
 - Idle Weaver adds motion on top of the incoming pose. If your base animation already turns the head, the gaze turn adds to it.
 - The gaze cone uses the actor's forward direction. On a plain Skeletal Mesh Actor with the mannequin, the mesh faces a different way than the actor. Rotate the mesh so both agree, or set **FOV Degrees** to 360.
