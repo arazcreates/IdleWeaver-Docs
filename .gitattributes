@@ -1,0 +1,6 @@
+* text=auto eol=lf
+
+# Images are binary. Never apply text filters to them.
+*.png -text
+*.jpg -text
+*.gif -text
