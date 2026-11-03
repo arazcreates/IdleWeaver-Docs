@@ -96,6 +96,8 @@ IdleWeaver->SetProfile(CalmProfile);  // a profile asset and its Default Context
 IdleWeaver->SetIdlePaused(true);      // freeze the motion for a cutscene
 ```
 
+To use these from C++, add `"IdleWeaver"` to `PublicDependencyModuleNames` in your module's `.Build.cs` file. Then include `IdleWeaverComponent.h`, and `IdleWeaverGazeTarget.h` if you use the **Idle Weaver Gaze Target** component.
+
 The same functions exist as Blueprint nodes. The node in an Animation Blueprint also has **Context** pins.
 
 Other useful functions on the component: **Set Preset**, **Set Master Intensity**, **Clear Gaze Override**, **Reseed**, **Get Effective Profile**, **Get Runtime Seed**, **Get/Set Motion LOD**, **Set Motion LOD Override**, **Get Gaze Target World**, **Get Gaze Target Serial**, **Get Head World Location**, **Resolve Mesh**, and **Find Idle Weaver Component For Mesh**. The world subsystem gives **Get Idle Components Near**, **Get Gaze Targets Near** and **Get Actors With Tag Near**.
