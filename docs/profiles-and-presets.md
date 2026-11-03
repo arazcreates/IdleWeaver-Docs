@@ -12,7 +12,7 @@ Select one in the **Preset** field of the Idle Weaver component.
 
 ![Six identical characters in the same pose, one for each preset. All six share one seed, so the preset is the only difference.](images/presets.gif)
 
-These six share the same mesh, pose and seed, so the preset is the only difference.
+These six share the same mesh, pose and seed, so the preset is the only difference. Master Intensity is 1.75 here so the differences read at GIF size. The default is 1.
 
 | Preset | Reads as | Breathing | Weight shifts | Head and eyes | Hands | Other |
 |---|---|---|---|---|---|---|

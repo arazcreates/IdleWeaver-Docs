@@ -6,19 +6,19 @@ Idle Weaver is an Unreal Engine 5.8 plugin that makes standing NPCs look alive. 
   <img src="docs/images/without-with.gif" width="640" alt="Two identical characters in the same pose. The one on the left stands frozen. The one on the right shifts its weight, moves its hands and looks around.">
 </p>
 
-Same mesh, same pose, same preset. The only difference is Master Intensity: 0 on the left, 1 on the right.
+Same mesh, same pose, same preset. The only difference is Master Intensity: 0 on the left, 1.75 on the right.
 
 Idle Weaver is a layer. It won't make a character walk, sit or dance. It makes one that's standing, sitting or waiting feel like someone's in there.
 
-Every clip on this page is the real plugin running on the default Unreal mannequin with stock presets. The only tweak: in the gaze clips, the red ball has a raised weight so the head keeps following it. The source code isn't in this repo. The plugin is sold on Fab.
+Every clip on this page is the real plugin, using stock presets on the default Unreal mannequin, plus one real MetaHuman. Master Intensity is set to 1.75 in the clips so the motion reads at GIF size. The default is 1, which is subtler. In the gaze clips, the red ball is set with **Set Gaze Target Actor**. The source code isn't in this repo. The plugin is sold on Fab.
 
 ## What it adds
 
 | | |
 |---|---|
 | ![A character's chest rising and falling.](docs/images/breathing.gif)<br>**Breathing** | ![A character shifting its weight from leg to leg.](docs/images/weight-shift.gif)<br>**Weight shifts** |
-| ![A character's hands fidgeting and clenching.](docs/images/hand-fidgets.gif)<br>**Hand fidgets** | ![A character turning its head to follow a red ball.](docs/images/gaze.gif)<br>**Head that follows targets** |
-| ![A test head turning, with two eyes aiming at a target.](docs/images/eyes.gif)<br>**Eyes that lead the head** (test head with two eye bones) | ![Three characters standing with different moods.](docs/images/moods.gif)<br>**Cold, tired or tense, set from gameplay** |
+| ![A character's hands fidgeting and clenching.](docs/images/hand-fidgets.gif)<br>**Hand fidgets** | ![A character turning its head to follow a moving red ball.](docs/images/gaze.gif)<br>**A head that follows targets** |
+| ![A real MetaHuman turning his head and face to follow a moving red ball.](docs/images/metahuman.gif)<br>**Works on MetaHumans** | ![Three characters standing with different moods.](docs/images/moods.gif)<br>**Cold, tired or tense, set from gameplay** |
 
 Feet stay planted on uneven ground:
 
