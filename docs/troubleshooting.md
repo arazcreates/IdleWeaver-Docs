@@ -67,9 +67,9 @@ Change **Max Yaw Degrees**, **Max Pitch Up Degrees** and **Max Pitch Down Degree
 
 - **The rig has no eye bones.** The plugin then adds a small eye-like movement to the head.
 - **The eye bones have unusual names.** Set **Eye Left** and **Eye Right** in the profile's **Bone Mapping**.
-- **MetaHuman:** the eyes are on the Face mesh. Add the **Idle Weaver Eyes** node to the Face Animation Blueprint. It looks like this in the graph, shown here in a test Animation Blueprint:
+- **MetaHuman:** the eyes are on the Face mesh, and RigLogic in the face's post-process Animation Blueprint rebuilds them. An Eyes node in the Face Animation Blueprint has no visible effect. Put the **Idle Weaver Eyes** node at the very end of a copy of **ABP_Face_PostProcess**, after RigLogic, and set the copy as the Face mesh's **Post Process Anim Blueprint**. See [Path C](reference.md#path-c-a-metahuman-or-any-character-built-from-several-meshes). The end of the graph looks like this:
 
-  ![The Idle Weaver Eyes (Gaze) node in an AnimGraph, marked in red.](images/fix-eyes.png)
+  ![The Idle Weaver Eyes (Gaze) node between RigLogic and Output Pose, marked in red.](images/fix-eyes.png)
 
 - **The eyes move the wrong way** on the Eyes node: set **Yaw Scale** or **Pitch Scale** to -1.
 

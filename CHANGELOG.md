@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.8.1 (2026-11-03)
+
+- Idle Weaver nodes in an Animation Blueprint now work in Play > Standalone Game. Before, the character showed the reference pose there.
+- New **Follow Live** option on Gaze Target components and **Follow Tagged Actors Live** in Gaze Targeting, for targets that move. Both are off by default.
+- Set Gaze Target Actor on a plain actor now aims at the center of its bounds, not 60 cm above its origin.
+- MetaHuman eyes: the Eyes node goes at the end of the face's post-process Animation Blueprint, after RigLogic. See Path C.
+
 ## 1.8.0 (2026-10-14)
 
 - A fixed seed now gives the same motion at any camera distance.

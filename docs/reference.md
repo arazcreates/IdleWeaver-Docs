@@ -74,10 +74,15 @@ A MetaHuman uses a Body mesh, a Face mesh, and clothing meshes that follow the b
 1. Add one **Idle Weaver** component to the MetaHuman actor.
 2. Set its **Target Mesh Component** to **Body**.
 3. In the Body Animation Blueprint, add the **Idle Weaver (Micro-Motion)** node (see Path B).
-4. In the Face Animation Blueprint, add the **Idle Weaver Eyes** node after the node that copies the body pose. In the node list it shows as **Idle Weaver Eyes (Gaze)**.
-5. Press Play.
+4. Duplicate **ABP_Face_PostProcess** (the original is shared by every MetaHuman in the project). Open the copy and add the **Idle Weaver Eyes** node at the very end, after RigLogic, right before **Output Pose**. In the node list it shows as **Idle Weaver Eyes (Gaze)**.
+5. Open the Face skeletal mesh asset and set **Post Process Anim Blueprint** to your copy.
+6. Press Play.
 
-Both nodes read the same component. They share one gaze target and one seed, so the eyes always agree with the head. The Eyes node calculates the head direction from the pose, so it does not depend on the eye bone axes. Auto-setup never installs an anim instance on a mesh that follows a Leader Pose Component, so clothing is not changed.
+The Eyes node has to come after RigLogic. RigLogic rebuilds the eye joints from the face curves, so an Eyes node anywhere before it, such as in the Face Animation Blueprint, has no visible effect. With this setup, both nodes read the same component and share one gaze target and one seed, so the eyes agree with the head. The face animation keeps playing. The node turns the eyeballs only; the eyelids don't follow.
+
+![A MetaHuman whose head and eyes follow a red ball, with the Eyes node after RigLogic.](images/metahuman-eyes.gif)
+
+Auto-setup never installs an anim instance on a mesh that follows a Leader Pose Component, so clothing is not changed.
 
 ## Drive it from gameplay
 
@@ -101,9 +106,11 @@ The component picks a target every few seconds from these sources. Each source h
 
 - **Players.** Every human player counts, so split-screen and multiplayer work. **Player Search Radius** sets the range.
 - **Other Idle Weaver NPCs.**
-- **Tagged actors.** Set **Look At Actors With Tag**, then add the same tag to a shop, a banner or a fire (**Details > Actor > Tags**). NPCs look at the center of the actor's bounds. **Tag Search Radius** sets the range.
-- **Points of interest.** Add an **Idle Weaver Gaze Target** component to any actor. Its **Interest** value scales how often NPCs look at it.
+- **Tagged actors.** Set **Look At Actors With Tag**, then add the same tag to a shop, a banner or a fire (**Details > Actor > Tags**). NPCs look at the center of the actor's bounds. **Tag Search Radius** sets the range. By default an NPC looks at the spot where the tagged actor was when it picked it. Turn on **Follow Tagged Actors Live** to follow tagged actors that move.
+- **Points of interest.** Add an **Idle Weaver Gaze Target** component to any actor. Its **Interest** value scales how often NPCs look at it. Turn on **Follow Live** on a target that moves, such as a carried lantern, and NPCs follow it while they look at it. With it off (the default), they look at the spot where it was when they picked it.
 - **Wander.** A random point in front of the character.
+
+Players, other NPCs and **Set Gaze Target Actor** are always followed live. Set Gaze Target Actor aims at a Pawn's eye height, at the head of another Idle Weaver character, and at the center of the bounds of any other actor.
 
 The **FOV Degrees** cone is measured from the direction the character faces: the actor forward of a Pawn, or the forward axis (+Y) of the skeletal mesh on any other actor. The head turns with smooth springs and stops at hard limits, so a character never turns its head too far. The eyes move first and make small quick jumps.
 
@@ -150,7 +157,7 @@ A Pose Library asset holds anchors: authored poses or idle loops. The **Idle Pos
 
 ## Determinism
 
-Turn on **Deterministic** and set a **Seed** on the component, or set **Seed** to 0 or more on the nodes. All random motion then comes from that seed. With a fixed time step (replays, cinematics, Movie Render Queue), the motion is the same on every run, at any camera distance: the channels keep running at every detail level, also when the NPC is culled. Gaze target choice depends on the world, for example on who stands near the NPC. A target that leaves its search range is dropped at once. For an exact result, use **Set Gaze Target Actor** or **Trigger Glance At**, or turn off **Scan For Targets**.
+Turn on **Deterministic** and set a **Seed** on the component, or set **Seed** to 0 or more on the nodes. All random motion then comes from that seed. With a fixed time step (replays, cinematics, Movie Render Queue), the motion is the same on every run, at any camera distance. Gaze target choice depends on the world, for example on who stands near the NPC. A target that leaves its search range is dropped at once. For an exact result, use **Set Gaze Target Actor** or **Trigger Glance At**, or turn off **Scan For Targets**.
 
 ## Baking
 
@@ -163,7 +170,7 @@ The bake captures the full output of the mesh: the Pose Library, the micro-motio
 
 ## Rigs and retargeting
 
-Bone detection starts at the head and the pelvis, sorts the chain between them into spine and neck, and follows the largest child chains for the arms and legs. It skips twist, IK, roll and attachment helper bones. Names from the UE4 and UE5 mannequins, Mixamo (the `mixamorig:` prefix is removed), 3ds Max Biped and MetaHuman are recognized. If a bone is not found, the channel that needs it turns off. For example, a rig without eye bones gets a small eye movement on the head. Set any bone by hand in the profile's **Bone Mapping**.
+Bones are found on their own on the UE4 and UE5 mannequins, Mixamo, 3ds Max Biped and MetaHuman rigs. On any other rig, or if a bone is picked wrong, set it by hand in the profile's **Bone Mapping**.
 
 A baked clip is a normal Animation Sequence, so the IK Retargeter can use it.
 
